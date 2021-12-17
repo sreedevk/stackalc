@@ -1,0 +1,10 @@
+[package]
+name = "stackalc"
+version = "0.0.1"
+edition = "2018"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+termion = "1.5.6"
+tui = "0.16.0"
