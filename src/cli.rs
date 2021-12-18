@@ -34,7 +34,7 @@ impl Cli {
                 .split(f.size());
             let sub_right_chunks = Layout::default()
                 .direction(Direction::Vertical)
-                .margin(1)
+                .margin(0)
                 .constraints([Constraint::Percentage(80), Constraint::Percentage(20)].as_ref())
                 .split(chunks[1]);
 
@@ -71,7 +71,7 @@ impl Cli {
             let formatted_buffer = Spans::from(Span::styled(app.formatted_input_buffer(), Style::default().fg(Color::Blue)));
             let input_buffer_span = Paragraph::new(vec![formatted_buffer])
                 .block(Block::default().title("Input").borders(Borders::ALL))
-                .style(Style::default().fg(Color::White).bg(Color::Black))
+                .style(Style::default().fg(Color::White))
                 .alignment(Alignment::Left)
                 .wrap(Wrap { trim: true });
 
