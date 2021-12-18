@@ -10,6 +10,9 @@ use termion::{
     input::TermRead
 };
 
+use crate::app::{App, AppState};
+use crate::calc::{OptIdent};
+
 pub enum Event<T> {
     Input(T),
     Tick
@@ -56,6 +59,28 @@ impl EventsManager {
             rx,
             input_handle,
             tick_handle
+        }
+    }
+
+    fn dequeue(&mut self) -> Result<Event<Key>, mpsc::TryRecvError> {
+        self.rx.try_recv()
+    }
+
+    pub fn handle_events(&mut self, app: &mut App) -> Result<(), mpsc::TryRecvError> {
+        let event = self.dequeue();
+        match event {
+            Ok(Event::Input(key)) => {
+                match key {
+                    Key::Char('+') => { app.app_calc.reduce(OptIdent::Add); Ok(()) },
+                    Key::Char('-') => { app.app_calc.reduce(OptIdent::Sub); Ok(()) },
+                    Key::Char('/') => { app.app_calc.reduce(OptIdent::Div); Ok(()) },
+                    Key::Char('*') => { app.app_calc.reduce(OptIdent::Mul); Ok(()) },
+                    Key::Char('q') => { app.app_state = AppState::Halted; Ok(()) },
+                    _ => Ok(())
+                }
+            },
+            Ok(Event::Tick) => { Ok(()) },
+            Err(_) => Ok(())
         }
     }
 }

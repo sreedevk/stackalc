@@ -9,10 +9,9 @@ pub enum AppState {
 }
 
 pub struct App {
-    app_cli: cli::Cli,
-    app_calc: calc::Calc,
-    app_state: AppState,
-    events_manager: events::EventsManager,
+    pub app_cli: cli::Cli,
+    pub app_calc: calc::Calc,
+    pub app_state: AppState,
 }
 
 impl App {
@@ -20,13 +19,14 @@ impl App {
         App {
             app_cli: cli::Cli::init().unwrap(),
             app_calc: calc::Calc::init(),
-            app_state: AppState::Running,
-            events_manager: events::EventsManager::init(),
+            app_state: AppState::Running
         }
     }
 
     pub fn run(&mut self) {
+        let mut events_manager = events::EventsManager::init();
         while self.app_state == AppState::Running {
+            events_manager.handle_events(self).unwrap();
             self.app_cli.render(&mut self.app_calc);
         }
     }
