@@ -1,5 +1,3 @@
-#[allow(dead_code)]
-
 #[derive(Debug)]
 pub struct Calc {
     pub frames: Vec<f64>

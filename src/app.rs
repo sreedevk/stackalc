@@ -1,5 +1,6 @@
 use crate::cli;
 use crate::calc;
+use crate::events;
 
 #[derive(PartialEq)]
 pub enum AppState {
@@ -10,7 +11,8 @@ pub enum AppState {
 pub struct App {
     app_cli: cli::Cli,
     app_calc: calc::Calc,
-    app_state: AppState
+    app_state: AppState,
+    events_manager: events::EventsManager,
 }
 
 impl App {
@@ -18,7 +20,8 @@ impl App {
         App {
             app_cli: cli::Cli::init().unwrap(),
             app_calc: calc::Calc::init(),
-            app_state: AppState::Running
+            app_state: AppState::Running,
+            events_manager: events::EventsManager::init(),
         }
     }
 

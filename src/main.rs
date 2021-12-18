@@ -1,6 +1,7 @@
 mod calc;
 mod cli;
 mod app;
+mod events;
 
 use calc::Calc;
 use calc::OptIdent;
