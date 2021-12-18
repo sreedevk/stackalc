@@ -1,16 +1,14 @@
 mod calc;
 mod cli;
+mod app;
 
 use calc::Calc;
 use calc::OptIdent;
 use cli::Cli;
+use app::App;
 
 fn main() -> Result<(), std::io::Error> {
-    let mut c = Calc::init();
-    let mut cli = Cli::init()?;
-    c.push(10.0);
-    c.push(20.0);
-    c.reduce(OptIdent::Add);
-    cli.render_stack(&c);
+    let mut app = App::init();
+    app.run();
     Ok(())
 }
