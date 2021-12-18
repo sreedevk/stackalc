@@ -76,6 +76,17 @@ impl EventsManager {
                     Key::Char('/') => { app.app_calc.reduce(OptIdent::Div); Ok(()) },
                     Key::Char('*') => { app.app_calc.reduce(OptIdent::Mul); Ok(()) },
                     Key::Char('q') => { app.app_state = AppState::Halted; Ok(()) },
+                    Key::Char('0') => { app.input_buffer.push(String::from("0")); Ok(()) },
+                    Key::Char('1') => { app.input_buffer.push(String::from("1")); Ok(()) },
+                    Key::Char('2') => { app.input_buffer.push(String::from("2")); Ok(()) },
+                    Key::Char('3') => { app.input_buffer.push(String::from("3")); Ok(()) },
+                    Key::Char('4') => { app.input_buffer.push(String::from("4")); Ok(()) },
+                    Key::Char('5') => { app.input_buffer.push(String::from("5")); Ok(()) },
+                    Key::Char('6') => { app.input_buffer.push(String::from("6")); Ok(()) },
+                    Key::Char('7') => { app.input_buffer.push(String::from("7")); Ok(()) },
+                    Key::Char('8') => { app.input_buffer.push(String::from("8")); Ok(()) },
+                    Key::Char('9') => { app.input_buffer.push(String::from("9")); Ok(()) },
+                    Key::Char('\n') => { app.parse_input(); Ok(()) },
                     _ => Ok(())
                 }
             },
