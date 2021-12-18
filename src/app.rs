@@ -9,7 +9,6 @@ pub enum AppState {
 }
 
 pub struct App {
-    pub app_cli: cli::Cli,
     pub app_calc: calc::Calc,
     pub app_state: AppState,
     pub input_buffer: Vec<String>
@@ -18,7 +17,6 @@ pub struct App {
 impl App {
     pub fn init() -> App {
         App {
-            app_cli: cli::Cli::init().unwrap(),
             app_calc: calc::Calc::init(),
             app_state: AppState::Running,
             input_buffer: Vec::with_capacity(64)
@@ -29,14 +27,20 @@ impl App {
         let input = self.input_buffer.join("");
         let parsed_input: f64 = input.as_str().parse().unwrap();
         self.app_calc.push(parsed_input);
-        self.input_buffer = Vec::with_capacity(64);
+        self.input_buffer.clear();
+    }
+
+    pub fn formatted_input_buffer(&self) -> String {
+        String::from(self.input_buffer.join(""))
     }
 
     pub fn run(&mut self) {
         let mut events_manager = events::EventsManager::init();
+        let mut cli_manager = cli::Cli::init().unwrap();
+
         while self.app_state == AppState::Running {
             events_manager.handle_events(self).unwrap();
-            self.app_cli.render(&mut self.app_calc);
+            cli_manager.render(self);
         }
     }
 }
