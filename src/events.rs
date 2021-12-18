@@ -86,6 +86,7 @@ impl EventsManager {
                     Key::Char('7') => { app.input_buffer.push(String::from("7")); Ok(()) },
                     Key::Char('8') => { app.input_buffer.push(String::from("8")); Ok(()) },
                     Key::Char('9') => { app.input_buffer.push(String::from("9")); Ok(()) },
+                    Key::Char('.') => { app.input_buffer.push(String::from(".")); Ok(()) },
                     Key::Char('\n') => { app.parse_input(); Ok(()) },
                     _ => Ok(())
                 }
